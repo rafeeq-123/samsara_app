@@ -1,0 +1,64 @@
+<% @data['vehicles'].each do |value|=%>
+   <h2> Name: </h2> <%= value['name']=%>
+   <br>
+   <h2> Location: </h2> <%= value['location']=%>
+   <!-- added the delimiter to add . to make the number recieved from the API more plotable and understandable. also added the celisus sign as the response from the api is in celisus this is flexible enough to meet the max of the em22  100 celisus as the em22 is between -55 and 100 --> 
+
+ <h2>Ambient Temperature:</h2> &#8451 <%=number_with_delimiter(@temperature[0][:ambientTemperature], :delimiter => '.')=%></h1>
+ <h2> Probe Temperature:</h2> &#8451 <%=number_with_delimiter(@temperature[0][:probeTemperature], :delimiter => '.') =%></h1>
+<h2>Humidity:</h2><%= @humidity[0][:humidity]=%>
+<h1><%@history%></h1>
+<%end%>
+<!-- I have created a method in my app > helper > back_helper file to take some of the logic out of the view--> 
+<%am%>
+<%ambient?%>
+<!-- I am using chart.js here to graph. Chart.js is smart and flexible and will adjust the the axis number so the graph never runs off the page. I also have embedded ruby so to get the values -->
+
+
+<canvas id="samsaraChart" width="13500" height="4000" style="width: 350px; height: 500px;"></canvas>
+<script>
+var ctx = document.getElementById('samsaraChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Ambient Temperature', 'Probe Temperature', 'Humidity'],
+        datasets: [{
+            label: " Samsara Data ",
+            data: [<%=@am%>, <%=@pt%>, <%=@humi%>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            
+            borderWidth: 1
+
+        }]
+    },
+    options: {
+
+      legend: {
+        display: false
+         },
+         responsive: true,
+           scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
