@@ -77,7 +77,7 @@ def  sensor_list
     end    
   end 
   
-#I refactored this method 
+#I refactored this method below
   def samsara_fleet_info
     #making a get request using Faraday and then parsing the data and setting it to @data
     url = "https://api.samsara.com/v1/fleet/locations?access_token=#{Rails.application.credentials.secret_key}"
@@ -89,10 +89,5 @@ private
     @url = "https://api.samsara.com/v1/fleet/locations?access_token=#{Rails.application.credentials.secret_key}"
      @uri = Faraday.get url
     @data = JSON.parse @uri.body
-   end
-
-  def hash?
-    temp_hash = eval(response.body)
-    @temperature = temp_hash[:sensors]
   end
 end
