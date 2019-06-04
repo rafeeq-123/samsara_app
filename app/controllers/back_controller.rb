@@ -1,12 +1,12 @@
 class BackController < ApplicationController
 
-  def index
+def index
     # giving me access to the methods in the index view (this is the root view)
-    temprature
-    sensor_list
-    humidity
-    samsara_fleet_info
-  end
+  temprature
+  sensor_list
+  humidity
+  samsara_fleet_info
+end
 # I had to change the gem I was using because getting 
 #a response would had made the code bulky. Post requests are good to get safe infromation
 # as the the informations is not appended to the URL like a GET request
