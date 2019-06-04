@@ -1,8 +1,10 @@
+<!-- here I am iterating over the @data hash pulling name and location--> 
+
 <% @data['vehicles'].each do |value|=%>
    <h2> Name: </h2> <%= value['name']=%>
    <br>
    <h2> Location: </h2> <%= value['location']=%>
-   <!-- added the delimiter to add . to make the number recieved from the API more plotable and understandable. also added the celisus sign as the response from the api is in celisus this is flexible enough to meet the max of the em22  100 celisus as the em22 is between -55 and 100 --> 
+   <!-- here @temperature[0][:ambientTemperature] and [:probeTemperature] I amd pull specfic values from the @temperature variable that I set in the controller added the delimiter to add . to make the number recieved from the API more plotable and understandable. also added the celisus sign as the response from the api is in celisus this is flexible enough to meet the max of the em22  100 celisus as the em22 is between -55 and 100. the &#8451 allows me to make the celisus sign.  --> 
 
  <h2>Ambient Temperature:</h2> &#8451 <%=number_with_delimiter(@temperature[0][:ambientTemperature], :delimiter => '.')=%></h1>
  <h2> Probe Temperature:</h2> &#8451 <%=number_with_delimiter(@temperature[0][:probeTemperature], :delimiter => '.') =%></h1>
@@ -13,6 +15,11 @@
 <%am%>
 <%ambient?%>
 <!-- I am using chart.js here to graph. Chart.js is smart and flexible and will adjust the the axis number so the graph never runs off the page. I also have embedded ruby so to get the values -->
+
+
+<!-- I have embedded ruby in the basic chart.js javascript code below I am pulling the 
+values from the back helper to not have to add a bunch of logic in the  views
+I added labels as well and also made the chart responsive within the option block. you can also easily change the type of graph within type to line and beyond -->
 
 
 <canvas id="samsaraChart" width="13500" height="4000" style="width: 350px; height: 500px;"></canvas>

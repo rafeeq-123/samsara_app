@@ -10,8 +10,12 @@ end
 # I had to change the gem I was using because getting 
 #a response would had made the code bulky. Post requests are good to get safe infromation
 # as the the informations is not appended to the URL like a GET request
+# his code is not very DRY
+# 3added a to do list in to_do_list.md
 def  sensor_list
-  #this is making a post request to get sensors list
+  #this is making a post request by intializing the restclient gem with  RestClient::Request.new to get sensors list
+  #if the call is successful it provide the response.body
+  #if fails and returns a 400 with the error.
   response = RestClient::Request.new({
       method: :post,
       url:"https://api.samsara.com/v1/sensors/list?access_token=#{Rails.application.credentials.secret_key}",
@@ -86,6 +90,7 @@ def  sensor_list
 
 private
   def samsara_get(url)
+    #here I took out some of the logic making the cde a litte more dry.
     @url = "https://api.samsara.com/v1/fleet/locations?access_token=#{Rails.application.credentials.secret_key}"
      @uri = Faraday.get url
     @data = JSON.parse @uri.body
