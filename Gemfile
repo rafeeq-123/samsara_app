@@ -13,7 +13,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'chart-js-rails'
 # Use Puma as the app server
-gem 'puma', '< 3.11'
+gem 'puma', '< 3.13'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'rest-client'
